@@ -1,0 +1,17 @@
+<main class="container-fluid">
+
+    <app-dropdown-fields
+    [sports]="sports"
+    [categories]="categories"
+    [competitions]="competitions"
+    [competitors]="competitors"
+    [players]="players"
+    [spinnerStatus]="spinnerStatus"
+    (id)="getCategoryForSport($event)"
+    (catId)="getCompetitions($event)"
+    (competId)="getCompetitors($event)"
+    (competitorId)="getPlayers($event)"
+    (newValue)="getForm($event)"
+    ></app-dropdown-fields>
+
+</main>

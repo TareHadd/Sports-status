@@ -1,0 +1,306 @@
+
+<div class="row-container desktop">
+
+    <div class="row main-row shadow px-4 bg-light">
+
+        <div class="col col-one mx-2 p-0" *ngIf="sports">
+            <p-dropdown 
+            [options]="sports" 
+            [(ngModel)]="selectedSport" 
+            optionLabel="name" 
+            optionValue="id"
+            [showClear]="true"
+            placeholder="Select a Sport" 
+            (onChange)="emitSportId(selectedSport)"
+            #sport
+            ></p-dropdown>
+        </div>
+    
+        <div class="col col-two mx-2 p-0"
+        [ngClass]="{'grayed': !categoryFetched}">
+            <p-dropdown 
+            [options]="categories" 
+            [(ngModel)]="selectedCategory" 
+            optionLabel="name" 
+            optionValue="id"
+            [disabled]="!categoryFetched"
+            [showClear]="true"
+            placeholder="Select a Category" 
+            (onChange)="emitCategoryId(selectedCategory)">
+            </p-dropdown>
+        </div>
+    
+        <div class="col col-three mx-2 p-0"
+        [ngClass]="{'grayed': !competitionFetched}">
+            <p-dropdown 
+            [options]="competitions" 
+            [(ngModel)]="selectedCompetition" 
+            optionLabel="name" 
+            optionValue="id"
+            [disabled]="!competitionFetched"
+            [showClear]="true"
+            placeholder="Select a Competition" 
+            (onChange)="emitCompetitionId(selectedCompetition)"
+            > 
+            </p-dropdown>
+        </div>
+    
+        <div class="col col-four mx-2 p-0"
+        [ngClass]="{'grayed': !competitorsFetched}">
+            <p-dropdown 
+            [options]="competitors" 
+            [(ngModel)]="selectedCompetitors" 
+            optionLabel="name" 
+            optionValue="id"
+            [disabled]="!competitorsFetched"
+            [showClear]="true"
+            placeholder="Select a Competitor" 
+            (onChange)="emitCompetitorId(selectedCompetitors)"
+            > 
+            </p-dropdown>
+        </div>
+    
+        <div class="col col-five mx-2 p-0"
+        [ngClass]="{'grayed': !playerFetched}">
+            <p-dropdown 
+            [options]="players" 
+            [(ngModel)]="selectedPlayer" 
+            optionLabel="name" 
+            optionValue="id"
+            [disabled]="!playerFetched"
+            [showClear]="true"
+            placeholder="Select a Player" 
+            (onChange)="selectPlayer()"
+            > 
+            </p-dropdown>
+        </div>
+    
+        
+    </div>
+
+</div>
+
+
+<div class="content p-4">
+
+    <div *ngIf="!spinnerStatus">
+        <div class="popup-container mt-4 position-relative">
+
+            <!-- This form holds info of selected dropdown -->
+
+            <form [formGroup]="namesForm" 
+                class="d-flex form" *ngIf="show">
+                <div 
+                    class="text bg-dark text-light mb-3 d-flex align-items-center shadow" 
+                    [ngClass]="{ 'ease': show }">
+                    <div style="width: 200px;" class="d-flex  reactive-popup">
+                        <span (click)="copyMessage(selectedId)">
+                            <i 
+                            class="pi pi-info-circle mx-2 pointer"
+                            popover='{{ selectedId }}'
+                            triggers="mouseenter:mouseleave"></i>
+                        </span>
+                        <p class="m-0">
+                            {{ toShowName }}
+                        </p>
+                    </div>
+        
+                <input 
+                type="text"
+                class="form-control reactive-input" 
+                [value]="nameValue" 
+                formControlName="value"
+                style="height: 30px; border-radius: 0 !important; width: 300px;">
+                </div>
+        
+                <div class="mx-4 reactive-icons">
+                    <span 
+                        class="pointer text-primary"
+                        (click)="openModal(template)">
+                        <i class="pi pi-save hover" style="font-size: 30px;"></i>
+                    </span>
+        
+                    <span class="text-danger mx-4 ">
+                        <i class="pi pi-trash pointer hover" style="font-size: 30px;" (click)="deleteValue()"></i>
+                    </span>
+                </div>
+        
+                
+                <input type="hidden" formControlName="name">
+                <input type="hidden" formControlName="id">
+
+
+            </form >
+            
+            <!-- This div is for info of country -->
+
+            <div class="text bg-dark text-light d-flex align-items-center shadow" *ngIf="showCountry"
+                [ngClass]="{ 'ease': showCountry }">
+                <div class="d-flex  reactive-popup2" style="width: 200px;">
+                    <span (click)="copyMessage(selectedCategory)">
+                        <i class="pi pi-info-circle mx-2 pointer"
+                        popover='{{ selectedCategory }}'
+                        triggers="mouseenter:mouseleave"></i>
+                    </span>
+                    <p class="m-0">
+                        Country name
+                    </p>
+                </div>
+                <input 
+                disabled
+                type="text"
+                class="form-control reactive-input2" 
+                [value]="toShowCountryName" 
+                style="height: 30px; border-radius: 0 !important; width: 300px;">
+            </div>
+        </div>
+        
+        <!-- We pass data to info component so we can show it -->
+        <div class="mt-5" *ngIf="data">
+            <app-info
+            [dataName]="dataName"
+            [data]="data"
+            ></app-info>
+        </div>
+        
+        <div *ngIf="showSearch" class="search pt-5 pb-5">
+            <p-listbox 
+                [options]="competitors" 
+                [(ngModel)]="selectedForBigSearch" 
+                optionLabel="name" 
+                optionValue="name" 
+                [filter]="true">
+            </p-listbox>
+        </div>
+        
+        <div *ngIf="showPlayerSearch" class="search pt-5 pb-5">
+            <p-listbox 
+                [options]="players" 
+                [(ngModel)]="selectedForBigSearch" 
+                optionLabel="name" 
+                optionValue="name" 
+                [filter]="true">
+            </p-listbox>
+        </div>
+    </div>
+
+    <div class="w-100 d-flex justify-content-center align-items-center" style="height: 80vh;" *ngIf="spinnerStatus">
+        <app-spinner></app-spinner>
+    </div>
+
+</div>
+
+<!-- Toas msg -->
+<p-toast></p-toast>
+
+
+<ng-template #template>
+    <div class="modal-body d-flex flex-column align-items-center justify-content-center">
+      <h4>Are you sure?</h4>
+      <button class="btn btn-primary" (click)="getNewValue()">SAVE</button>
+    </div>
+</ng-template>
+
+<!-- MOBILE -->
+
+<span 
+    class="d-flex justify-content-end pointer text-dark position-absolute menu m-2"
+    (click)="open()">
+        <i class="pi pi-align-justify" style="font-size: 40px;"></i>
+</span>
+
+<div class="side-nav mobile"
+    [ngClass]="{'open': navOpen}">
+
+    <span 
+    class="d-flex justify-content-end pointer text-light"
+    (click)="open()">
+        <i class="pi pi-align-justify mt-2 mr-3" style="font-size: 40px;"></i>
+   </span>
+
+   <div 
+        class="mt-4" 
+        style="margin-left: 70px; margin-right: 70px;"
+        *ngIf="sports" >
+            <p-dropdown 
+            [options]="sports" 
+            [(ngModel)]="selectedSport" 
+            optionLabel="name" 
+            optionValue="id"
+            [showClear]="true"
+            placeholder="Select a Sport" 
+            (onChange)="emitSportId(selectedSport)"
+            #sport
+            ></p-dropdown>
+    </div>
+
+    <div 
+        class="mt-5" 
+        style="margin-left: 70px; margin-right: 70px;"
+        *ngIf="sports" >
+            <p-dropdown 
+            [options]="categories" 
+            [(ngModel)]="selectedCategory" 
+            optionLabel="name" 
+            optionValue="id"
+            [disabled]="!categoryFetched"
+            [showClear]="true"
+            placeholder="Select a Category" 
+            (onChange)="emitCategoryId(selectedCategory)">
+            </p-dropdown>
+    </div>
+
+    <div 
+        class="mt-5" 
+        style="margin-left: 70px; margin-right: 70px;"
+        *ngIf="sports" >
+            <p-dropdown 
+            [options]="competitions" 
+            [(ngModel)]="selectedCompetition" 
+            optionLabel="name" 
+            optionValue="id"
+            [disabled]="!competitionFetched"
+            [showClear]="true"
+            placeholder="Select a Competition" 
+            (onChange)="emitCompetitionId(selectedCompetition)"
+            > 
+            </p-dropdown>
+    </div>
+
+    <div 
+        class="mt-5" 
+        style="margin-left: 70px; margin-right: 70px;"
+        *ngIf="sports" >
+             <p-dropdown 
+            [options]="competitors" 
+            [(ngModel)]="selectedCompetitors" 
+            optionLabel="name" 
+            optionValue="id"
+            [disabled]="!competitorsFetched"
+            [showClear]="true"
+            placeholder="Select a Competitor" 
+            (onChange)="emitCompetitorId(selectedCompetitors)"
+            > 
+            </p-dropdown>
+    </div>
+
+    <div 
+        class="mt-5" 
+        style="margin-left: 70px; margin-right: 70px;"
+        *ngIf="sports" >
+            <p-dropdown 
+            [options]="players" 
+            [(ngModel)]="selectedPlayer" 
+            optionLabel="name" 
+            optionValue="id"
+            [disabled]="!playerFetched"
+            [showClear]="true"
+            placeholder="Select a Player" 
+            (onChange)="selectPlayer()"
+            > 
+            </p-dropdown>
+    </div>
+
+
+</div>
+

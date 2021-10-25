@@ -1,0 +1,67 @@
+<div class="row w-100 d-flex justify-content-between m-0 my-3 text-light desktop" *ngFor="let s of data.data">
+    <div class="col mr-1 d-flex align-items-center bg-warning shadow"
+        [ngClass]="getColor(s.source)" >
+        <h4 class="m-0">
+            {{ returnEnumData(s.source) }}
+        </h4>
+    </div>
+    
+    <div class="col mr-1 bg-dark d-flex align-items-center shadow">
+        <h4 class="m-0">
+            <i 
+            class="pi pi-info-circle pr-1  pointer" 
+            style="font-size: 20px" 
+            popover='{{data.id}}'
+            triggers="mouseenter:mouseleave"
+            ></i>
+            {{ s.name }}
+        </h4>
+    </div>
+
+    <div class="col-2 bg-success d-flex align-items-center bg-danger shadow unpair justify-content-center">
+        <h4 class="m-0">
+            <i class="pi pi-minus-circle pr-1" style="font-size: 20px"></i>
+            UNPAIR
+        </h4>
+    </div>
+</div>
+
+<div class="mobile w-100 mb-2" *ngFor="let s of data.data">
+
+    <div class="d-flex justify-content-center align-items-center">
+
+        <div
+            style="min-width: 300px; width: 100%; font-size: 12px !important;" 
+        >
+            <div class="w-100 p-1 text-light"
+            [ngClass]="getColor(s.source)" >
+                <h4 class="m-0">
+                    <i 
+                    class="pi pi-info-circle pr-1  pointer" 
+                    style="font-size: 20px" 
+                    popover='{{data.id}}'
+                    triggers="mouseenter:mouseleave"
+                    ></i>
+                    {{ s.name }}
+                </h4>
+            </div>
+    
+            <div class="w-100 bg-dark text-light p-1">
+                <h4 class="m-0">
+                    {{ returnEnumData(s.source) }}
+                </h4>
+            </div>
+        </div>
+        
+        <div
+            style="max-width: 100px;" 
+            class="ml-1 text-danger "
+        >
+            <h4 class="m-0">
+                <i class="pi pi-trash pr-1" style="font-size: 30px"></i>
+            </h4>
+        </div>
+
+    </div>
+
+</div>

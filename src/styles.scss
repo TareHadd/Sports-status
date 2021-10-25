@@ -1,1 +1,51 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* Importing Bootstrap SCSS file. */
+@import "~bootstrap/scss/bootstrap";
+
+/* Importing Datepicker SCSS file. */
+@import "~ngx-bootstrap/datepicker/bs-datepicker";
+
+
+// PRIME-NG 
+
+// DROPDOWN STYLING
+// *
+// *
+
+.p-dropdown {
+    width: 100% !important;
+    min-width: 200px
+}
+
+.p-dropdown, .none{
+    width: 0px;
+}
+
+.p-listbox{
+    width: 600px !important;
+    height: 400px !important;
+    overflow-y: auto;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+
+@media screen and (max-width:1200px) {
+
+    .container-fluid{
+        padding-right: 0!important;
+        padding-left: 0 !important;
+    }
+
+}
+
+@media screen and (max-width:650px) {
+
+    .p-listbox{
+        width: 300px !important;
+        height: 300px !important;
+        overflow-y: auto;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+
+}
