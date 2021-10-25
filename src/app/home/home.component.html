@@ -7,6 +7,8 @@
     [competitors]="competitors"
     [players]="players"
     [spinnerStatus]="spinnerStatus"
+    [errorStatus]="errorStatus"
+    [errorMsg]="errorMsg"
     (id)="getCategoryForSport($event)"
     (catId)="getCompetitions($event)"
     (competId)="getCompetitors($event)"
@@ -15,3 +17,15 @@
     ></app-dropdown-fields>
 
 </main>
+
+<div class="error" *ngIf="errorStatus">
+    <div class="bg-danger m-2 p-2 d-flex justify-content-center text-dark border shadow">
+        <p class="text-light" style="font-size: 18px;width: 350px; text-align: center; overflow-wrap: break-word;">
+            Error occurred!
+            <br>
+            <strong>
+                Most common cases are that values couldn't load
+            </strong>
+        </p>
+    </div>
+</div>

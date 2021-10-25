@@ -6,3 +6,37 @@ main{
     background: rgb(121,121,121);
     background: linear-gradient(141deg, rgba(121,121,121,1) 0%, rgba(255,255,255,1) 50%, rgba(61,137,153,1) 100%);
 }
+
+
+
+
+.error {
+    animation: fadeInAnimation ease 10s;
+    animation-iteration-count: 5;
+    animation-fill-mode: forwards;
+    position:absolute;
+    top: 10vh;
+    right: 0px;
+    width: 400px;
+}
+
+  
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+
+    5% {
+        opacity: 1;
+     }
+    
+    80% {
+        opacity: 1;
+        width: 400px;
+        height: unset;
+     }
+
+     100% {
+        opacity: 0;
+     }
+}

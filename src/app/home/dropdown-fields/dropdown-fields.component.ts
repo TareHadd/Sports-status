@@ -7,7 +7,7 @@ import { PlayerInterface } from 'src/app/core/models/player-interface';
 import { SportsInterface } from 'src/app/core/models/sports-interface';
 import { DataServiceService } from 'src/app/core/services/data-service.service';
 
-import {MessageService} from 'primeng/api';
+import { MessageService } from 'primeng/api';
 
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
@@ -40,7 +40,9 @@ export class DropdownFieldsComponent implements OnInit {
   @Input() competitions!:CompetitionInterface[]
   @Input() competitors!:CompetitorsInterface[]
   @Input() players!:PlayerInterface[]
-  @Input() spinnerStatus!:boolean
+  @Input() spinnerStatus!:boolean;
+  @Input() errorStatus!:boolean;
+  @Input() errorMsg!:string;
  
  
   selectedSport!:any;
@@ -114,11 +116,6 @@ export class DropdownFieldsComponent implements OnInit {
   emitSportId(id:any){
     this.spinnerStatus = true
 
-    // this.players = []
-    // this.competitors = []
-    // this.categories = []
-    // this.competitions = []
-
     this.categoryFetched = false  //disable dropdowns
     this.competitionFetched = false
     this.playerFetched = false
@@ -129,6 +126,10 @@ export class DropdownFieldsComponent implements OnInit {
 
     this.show = false        // corner info and input
     this.showCountry = false
+
+    if(this.errorStatus){
+      this.messageService.add({severity:'error', summary:'Service Message', detail:'Successfuly deleted'});
+    }
 
     if(id){
       this.id.emit(id)
@@ -489,10 +490,6 @@ export class DropdownFieldsComponent implements OnInit {
     this.messageService.add({severity:'success', summary:'Service Message', detail:'Successfuly deleted'});
   }
 
-  // Alert funct
-  clear() {
-      this.messageService.clear();
-  }
 
   // Method for copy to clipboard 
   copyMessage(val: string){

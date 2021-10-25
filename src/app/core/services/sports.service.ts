@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs/operators';
+import { throwError } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 import { CategoryInterface } from '../models/category';
 import { CompetitionInterface } from '../models/competition-interface';
 import { CompetitorsInterface } from '../models/competitors-interface';
@@ -14,6 +15,7 @@ export class SportsService {
   api = 'http://devmeta.multifeedcenter.com';
   sport = 'Sport/all?includeSources=true';
 
+
   constructor(private http: HttpClient) {}
 
   getAllSports() {
@@ -21,24 +23,16 @@ export class SportsService {
       .get<SportsInterface[]>(`${this.api}/Sport/all?includeSources=true`)
       .pipe(
         map((responseData) => {
-          let dataArray = [];
-          let sorted = [];
-          dataArray = responseData
 
-          sorted = dataArray.sort(function (a, b) {
-            if (a.name < b.name) {
-              return -1;
-            }
-            if (a.name > b.name) {
-              return 1;
-            }
-            return 0;
-          });
+          return responseData.sort((a,b) => a.name.localeCompare(b.name));
 
-          // console.log(sorted);
+        }),
 
-          return sorted
+        catchError(errorResponse => {
+          console.log(errorResponse.message);
+          return throwError(errorResponse.message);
         })
+
       );
   }
 
@@ -49,26 +43,16 @@ export class SportsService {
       )
       .pipe(
         map((responseData) => {
-          // console.log(responseData)
-          let dataArray = [];
-          let sorted = [];
 
-          dataArray = responseData
+          return responseData.sort((a,b) => a.name.localeCompare(b.name));
 
-          sorted = dataArray.sort(function (a, b) {
-            if (a.name < b.name) {
-              return -1;
-            }
-            if (a.name > b.name) {
-              return 1;
-            }
-            return 0;
-          });
+        }),
 
-          // console.log( sorted );
-
-          return sorted
+        catchError(errorResponse => {
+          console.log(errorResponse.message);
+          return throwError(errorResponse.message);
         })
+        
       );
   }
 
@@ -78,84 +62,53 @@ export class SportsService {
       // https://meta.multifeedcenter.com/Competition/category/315154?includeSources=true
       .pipe(
         map((responseData) => {
-          // console.log(responseData)
-          let dataArray = [];
-          let sorted = [];
 
-          dataArray = responseData
+          return responseData.sort((a,b) => a.name.localeCompare(b.name));
 
-          sorted = dataArray.sort(function (a, b) {
-            if (a.name < b.name) {
-              return -1;
-            }
-            if (a.name > b.name) {
-              return 1;
-            }
-            return 0;
-          });
+        }),
 
-          // console.log( sorted );
-
-          return sorted
+        catchError(errorResponse => {
+          console.log(errorResponse.message);
+          return throwError(errorResponse.message);
         })
+        
       );
   }
 
   getCompetitiorsForCompetition(id:any){
     return this.http.get<CompetitorsInterface[]>(`${this.api}/Competitor/competition/${id}`)
     .pipe(
-      map(
-        resData =>{
-          let dataArray = [];
-          let sorted = [];
+      map((responseData) => {
 
-          dataArray = resData
+        return responseData.sort((a,b) => a.name.localeCompare(b.name));
 
-          sorted = dataArray.sort(function (a, b) {
-            if (a.name < b.name) {
-              return -1;
-            }
-            if (a.name > b.name) {
-              return 1;
-            }
-            return 0;
-          });
+      }),
 
-          // console.log( sorted );
-
-          return sorted
-        }
-      )
-    )
+      catchError(errorResponse => {
+        console.log(errorResponse.message);
+        return throwError(errorResponse.message);
+      })
+    );
   }
 
   getPlayersForCometitor(id:any){
-    return this.http.get<PlayerInterface[]>(`${this.api}/Player/competitor/${id}?includeSources=true`)
+    return this.http.get<PlayerInterface[]>(`${this.api}/Playezr/competitor/${id}?includeSources=true`)
     .pipe(
-      map(
-        resData => {
-          let dataArray = [];
-          let sorted = [];
+      map((responseData) => {
 
-          dataArray = resData
+        return responseData.sort((a,b) => a.name.localeCompare(b.name));
 
-          sorted = dataArray.sort(function (a, b) {
-            if (a.name < b.name) {
-              return -1;
-            }
-            if (a.name > b.name) {
-              return 1;
-            }
-            return 0;
-          });
-
-          // console.log( sorted );
-
-          return sorted
-        }
-      )
-    )
+      }),
+      
+      catchError(errorResponse => {
+        console.log(errorResponse.message);
+        return throwError(errorResponse.message);
+      })
+      
+    );
   }
+
+  
 
 
 }

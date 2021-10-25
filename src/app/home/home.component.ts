@@ -23,9 +23,13 @@ export class HomeComponent implements OnInit {
   categoryId!:any
 
   spinnerStatus = false
+  errorStatus = false
+
+  errorMsg:string = '';
 
 
-  constructor(private service: SportsService) { }
+  constructor(
+    private service: SportsService) { }
 
   ngOnInit(): void {
 
@@ -39,7 +43,11 @@ export class HomeComponent implements OnInit {
       resData => {
         this.sports = resData
         this.spinnerStatus = false
-        // console.log(resData)
+        this.errorStatus = false
+      },
+
+      error => {
+        this.error(error);
       }
     )
   }
@@ -52,6 +60,11 @@ export class HomeComponent implements OnInit {
         resData => {
           this.categories = resData
           this.spinnerStatus = false
+          this.errorStatus = false
+        },
+
+        error => {
+          this.error(error);
         }
       )
     }
@@ -65,7 +78,13 @@ export class HomeComponent implements OnInit {
       this.service.getCompetitionsForCategory(id).subscribe(
         resData =>{
           this.competitions = resData
+          this.spinnerStatus = false
+          this.errorStatus = false
           // console.log(this.competitions)
+        },
+
+        error => {
+          this.error(error);
         }
       )
     }
@@ -78,6 +97,11 @@ export class HomeComponent implements OnInit {
         resData => {
           this.competitors = resData
           this.spinnerStatus = false
+          this.errorStatus = false
+        },
+
+        error => {
+          this.error(error);
         }
       )
     }
@@ -90,6 +114,11 @@ export class HomeComponent implements OnInit {
         resData=>{
           this.players = resData
           this.spinnerStatus = false
+          this.errorStatus = false
+        },
+
+        error => {
+          this.error(error);
         }
       )
     }
@@ -124,6 +153,12 @@ export class HomeComponent implements OnInit {
       this.players[id].name = name
     }
 
+  }
+
+  error(error:any){
+    this.errorMsg = error;
+    this.spinnerStatus = false;
+    this.errorStatus = true;
   }
 
  

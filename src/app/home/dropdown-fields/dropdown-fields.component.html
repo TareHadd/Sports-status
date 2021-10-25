@@ -74,9 +74,14 @@
             > 
             </p-dropdown>
         </div>
+
+        <!-- <div class="col-12 d-flex justify-content-center align-items-center text-light" *ngIf="errorStatus">
+            <h4>An error occurred! Error: {{errorMsg}}</h4>
+        </div> -->
     
-        
     </div>
+    
+
 
 </div>
 
@@ -190,7 +195,7 @@
 
 </div>
 
-<!-- Toas msg -->
+<!-- Toast msg -->
 <p-toast></p-toast>
 
 
@@ -203,11 +208,11 @@
 
 <!-- MOBILE -->
 
-<span 
+<!-- <span 
     class="d-flex justify-content-end pointer text-dark position-absolute menu m-2"
     (click)="open()">
         <i class="pi pi-align-justify" style="font-size: 40px;"></i>
-</span>
+</span> -->
 
 <div class="side-nav mobile"
     [ngClass]="{'open': navOpen}">

@@ -36,7 +36,6 @@ main{
     }
 }
 
-
 .content{
     background: rgba($color: #ffffff, $alpha: 0.3);
     width: 80%;
@@ -51,6 +50,11 @@ main{
 .hover:hover{
     transform: scale(1.1);
     transition: 0.2s;
+}
+
+.error{
+    background: #dc3545 !important;
+    transition: 0.5s ease-in;
 }
 
 

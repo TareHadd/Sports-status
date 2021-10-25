@@ -18,21 +18,10 @@ export class InfoComponent implements OnInit {
   }
 
   returnEnumData(id:any){
+    console.log(1)
     return Source[id]
   }
 
-  getColor(id:any){
-    return Source[id]==="RUNNINGBALL"?'blue':
-    Source[id]==="BETRADAR"?'lightblue':
-    Source[id]==="BETGENIUS"?'green':
-    Source[id]==="SPORTRADAR"?'purple':
-    Source[id]==="OPTA"?'red':
-    Source[id]==="MANUAL"?'neonblue':
-    Source[id]==="LSPORTS"?'orange':
-    Source[id]==="LS_BET365"?'lightgreen':
-    Source[id]==="LS_BWIN"?'bg-dark':'bg-primary'
-
-  }
 
 
 

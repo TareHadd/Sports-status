@@ -9,20 +9,9 @@ export class DataServiceService {
   constructor() { }
 
   extractData(array:any[], filterWhat:any){
-    for(let d of array.filter(t => t.id === filterWhat)){
-      return d
-    }
-  }
 
-  extractSource(data:any[]){
-
-    let array = []
-
-    for(let d of data){
-      array.push(d)
-    }
-
-    return array
+    return array.find(t => t.id === filterWhat)
+    
   }
 
   findIndexById(array:any[], id:any){

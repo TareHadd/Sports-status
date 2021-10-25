@@ -1,8 +1,8 @@
 <div class="row w-100 d-flex justify-content-between m-0 my-3 text-light desktop" *ngFor="let s of data.data">
-    <div class="col mr-1 d-flex align-items-center bg-warning shadow"
-        [ngClass]="getColor(s.source)" >
+    <div class="col mr-1 d-flex align-items-center shadow"
+        [class]="'color'+s.source" >
         <h4 class="m-0">
-            {{ returnEnumData(s.source) }}
+            {{ s.source }}
         </h4>
     </div>
     
@@ -34,7 +34,7 @@
             style="min-width: 300px; width: 100%; font-size: 12px !important;" 
         >
             <div class="w-100 p-1 text-light"
-            [ngClass]="getColor(s.source)" >
+            [class]="'color'+s.source"  >
                 <h4 class="m-0">
                     <i 
                     class="pi pi-info-circle pr-1  pointer" 
@@ -48,7 +48,7 @@
     
             <div class="w-100 bg-dark text-light p-1">
                 <h4 class="m-0">
-                    {{ returnEnumData(s.source) }}
+                    {{ s.source }}
                 </h4>
             </div>
         </div>
