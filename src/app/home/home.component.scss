@@ -8,11 +8,9 @@ main{
 }
 
 
-
-
 .error {
-    animation: fadeInAnimation ease 10s;
-    animation-iteration-count: 5;
+    animation: fadeInAnimation ease 20s;
+    animation-iteration-count: 1;
     animation-fill-mode: forwards;
     position:absolute;
     top: 10vh;
@@ -26,17 +24,21 @@ main{
         opacity: 0;
     }
 
-    5% {
+    10% {
         opacity: 1;
      }
     
-    80% {
+    97% {
         opacity: 1;
         width: 400px;
+        top: 10vh;
+        right: 0px;
         height: unset;
      }
 
      100% {
+        top: -100%;
         opacity: 0;
+        z-index: 123131313;
      }
 }

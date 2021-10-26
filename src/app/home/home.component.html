@@ -19,12 +19,14 @@
 </main>
 
 <div class="error" *ngIf="errorStatus">
-    <div class="bg-danger m-2 p-2 d-flex justify-content-center text-dark border shadow">
+    <div 
+    class=" m-4 p-2 d-flex justify-content-center text-dark border shadow" 
+    style="border-radius: 15px; background: rgba(209, 29, 29, 0.8);">
         <p class="text-light" style="font-size: 18px;width: 350px; text-align: center; overflow-wrap: break-word;">
             Error occurred!
             <br>
             <strong>
-                Most common cases are that values couldn't load
+                Most common cases are that values couldn't load.
             </strong>
         </p>
     </div>

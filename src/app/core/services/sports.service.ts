@@ -92,7 +92,7 @@ export class SportsService {
   }
 
   getPlayersForCometitor(id:any){
-    return this.http.get<PlayerInterface[]>(`${this.api}/Playezr/competitor/${id}?includeSources=true`)
+    return this.http.get<PlayerInterface[]>(`${this.api}/Player/competitor/${id}?includeSources=true`)
     .pipe(
       map((responseData) => {
 

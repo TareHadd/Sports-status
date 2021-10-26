@@ -1,7 +1,7 @@
 
 <div class="row-container desktop">
 
-    <div class="row main-row shadow px-4 bg-light">
+    <div class="row main-row shadow px-4 bg-light" [ngClass]="{'blink':errorStatus}">
 
         <div class="col col-one mx-2 p-0" *ngIf="sports">
             <p-dropdown 
@@ -9,8 +9,8 @@
             [(ngModel)]="selectedSport" 
             optionLabel="name" 
             optionValue="id"
-            [showClear]="true"
             placeholder="Select a Sport" 
+            [filter]="true"
             (onChange)="emitSportId(selectedSport)"
             #sport
             ></p-dropdown>
@@ -24,7 +24,8 @@
             optionLabel="name" 
             optionValue="id"
             [disabled]="!categoryFetched"
-            [showClear]="true"
+            [showClear]="false" 
+            [filter]="true"
             placeholder="Select a Category" 
             (onChange)="emitCategoryId(selectedCategory)">
             </p-dropdown>
@@ -38,7 +39,8 @@
             optionLabel="name" 
             optionValue="id"
             [disabled]="!competitionFetched"
-            [showClear]="true"
+            [showClear]="false" 
+            [filter]="true"
             placeholder="Select a Competition" 
             (onChange)="emitCompetitionId(selectedCompetition)"
             > 
@@ -53,7 +55,8 @@
             optionLabel="name" 
             optionValue="id"
             [disabled]="!competitorsFetched"
-            [showClear]="true"
+            [showClear]="false" 
+            [filter]="true"
             placeholder="Select a Competitor" 
             (onChange)="emitCompetitorId(selectedCompetitors)"
             > 
@@ -68,17 +71,14 @@
             optionLabel="name" 
             optionValue="id"
             [disabled]="!playerFetched"
-            [showClear]="true"
+            [showClear]="false" 
+            [filter]="true"
             placeholder="Select a Player" 
             (onChange)="selectPlayer()"
             > 
             </p-dropdown>
         </div>
 
-        <!-- <div class="col-12 d-flex justify-content-center align-items-center text-light" *ngIf="errorStatus">
-            <h4>An error occurred! Error: {{errorMsg}}</h4>
-        </div> -->
-    
     </div>
     
 
@@ -158,6 +158,7 @@
                 [value]="toShowCountryName" 
                 style="height: 30px; border-radius: 0 !important; width: 300px;">
             </div>
+            
         </div>
         
         <!-- We pass data to info component so we can show it -->
@@ -208,11 +209,13 @@
 
 <!-- MOBILE -->
 
-<!-- <span 
-    class="d-flex justify-content-end pointer text-dark position-absolute menu m-2"
+<div class="bg-info position-absolute menu">
+    <span 
+    class="d-flex justify-content-start pointer text-dark m-2 toggle"
     (click)="open()">
         <i class="pi pi-align-justify" style="font-size: 40px;"></i>
-</span> -->
+    </span>
+</div>
 
 <div class="side-nav mobile"
     [ngClass]="{'open': navOpen}">

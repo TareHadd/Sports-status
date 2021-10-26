@@ -114,7 +114,6 @@ export class DropdownFieldsComponent implements OnInit {
   // Theese 5 methods are used for values and dropdown changes
 
   emitSportId(id:any){
-    this.spinnerStatus = true
 
     this.categoryFetched = false  //disable dropdowns
     this.competitionFetched = false
@@ -132,6 +131,9 @@ export class DropdownFieldsComponent implements OnInit {
     }
 
     if(id){
+      
+      this.spinnerStatus = true
+
       this.id.emit(id)
       this.categoryFetched = true
 
@@ -180,12 +182,17 @@ export class DropdownFieldsComponent implements OnInit {
       let text = 'Category name: '
       this.toShowName = text
       this.value.patchValue(this.dataService.extractData(this.categories, this.selectedCategory).name) 
-      // console.log(this.extractData(this.categories, this.selectedCategory))
 
-      this.toShowCountryName = this.dataService.extractData(this.categories, this.selectedCategory).name
-      // console.log(this.toShowCountryName)
-      this.showCountry = true
+      // Condition for showing country info
+      if ( this.dataService.extractData(this.categories, this.selectedCategory).countryID === null){
+        this.showCountry = false;
+      }else {
+        this.showCountry = true;
+        this.toShowCountryName = this.dataService.extractData(this.categories, this.selectedCategory).name;
+      }
+      // 
 
+      // Data passed to info
       this.data = {}
       this.data = {
         data: this.dataService.extractData(this.categories, this.selectedCategory).sourceCategories,
@@ -313,7 +320,7 @@ export class DropdownFieldsComponent implements OnInit {
 
       
       if(this.name.value === 'sports'){
-        this.sports = [...this.sports]
+        this.sports = [...this.sports];
       }
 
       if(this.name.value === 'categories'){
@@ -389,6 +396,9 @@ export class DropdownFieldsComponent implements OnInit {
       // Toast
       this.addSingle()
 
+      // Error
+      this.errorStatus = false
+
 
     }
 
@@ -434,6 +444,9 @@ export class DropdownFieldsComponent implements OnInit {
 
       // Toast
       this.addSingle()
+
+      // Error
+      this.errorStatus = false
     }
 
     if(type === 'players'){
@@ -454,6 +467,9 @@ export class DropdownFieldsComponent implements OnInit {
  
        // Toast
        this.addSingle()
+       
+       // Error
+       this.errorStatus = false
     }
 
     
@@ -464,6 +480,29 @@ export class DropdownFieldsComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
   }
 
+  // Alert on delete
+  addSingle() {
+    this.messageService.add({severity:'success', summary:'Service Message', detail:'Successfuly deleted'});
+  }
+
+  // Method for copy to clipboard 
+  copyMessage(val: string){
+    const selBox = document.createElement('textarea');
+    selBox.style.position = 'fixed';
+    selBox.style.left = '0';
+    selBox.style.top = '0';
+    selBox.style.opacity = '0';
+    selBox.value = val;
+    document.body.appendChild(selBox);
+    selBox.focus();
+    selBox.select();
+    document.execCommand('copy');
+    document.body.removeChild(selBox);
+    this.messageService.add({severity:'info', summary:'Service Message', detail:'Successfuly copied ID'});
+  }
+
+
+  
 
   // Get form values
 
@@ -483,29 +522,6 @@ export class DropdownFieldsComponent implements OnInit {
     return this.namesForm.get('arrayId') as FormControl;
   }
 
- 
-
-  // Alert on delete
-  addSingle() {
-    this.messageService.add({severity:'success', summary:'Service Message', detail:'Successfuly deleted'});
-  }
-
-
-  // Method for copy to clipboard 
-  copyMessage(val: string){
-    const selBox = document.createElement('textarea');
-    selBox.style.position = 'fixed';
-    selBox.style.left = '0';
-    selBox.style.top = '0';
-    selBox.style.opacity = '0';
-    selBox.value = val;
-    document.body.appendChild(selBox);
-    selBox.focus();
-    selBox.select();
-    document.execCommand('copy');
-    document.body.removeChild(selBox);
-    this.messageService.add({severity:'info', summary:'Service Message', detail:'Successfuly copied ID'});
-  }
 
   // Mobile
 

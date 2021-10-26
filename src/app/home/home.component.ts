@@ -129,7 +129,8 @@ export class HomeComponent implements OnInit {
     let id = value.arrayId
     let type = value.name
 
-    let holder
+    console.log(id);
+
 
     if(type === 'sports'){
       this.sports[id].name = name

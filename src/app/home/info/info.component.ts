@@ -11,16 +11,14 @@ export class InfoComponent implements OnInit {
   @Input() data!:any
   @Input() dataName!:any
 
+  Source = Source;
+
   constructor() { }
 
   ngOnInit(): void {
 
   }
 
-  returnEnumData(id:any){
-    console.log(1)
-    return Source[id]
-  }
 
 
 
